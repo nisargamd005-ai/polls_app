@@ -31,6 +31,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(','
 if 'polls-app-8.onrender.com' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('polls-app-8.onrender.com')
 
+CSRF_TRUSTED_ORIGINS = ['https://polls-app-8.onrender.com']
+
 
 # Application definition
 
