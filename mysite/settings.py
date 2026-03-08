@@ -26,7 +26,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$-d#vj-gpg*(h@124^kxm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost,polls-app-8.onrender.com').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+# Always allow the Render deployment domain
+if 'polls-app-8.onrender.com' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('polls-app-8.onrender.com')
 
 
 # Application definition
