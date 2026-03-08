@@ -33,6 +33,9 @@ if 'polls-app-8.onrender.com' not in ALLOWED_HOSTS:
 
 CSRF_TRUSTED_ORIGINS = ['https://polls-app-8.onrender.com']
 
+# Fix for Render/Gunicorn to recognize HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
@@ -124,7 +127,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Use a more resilient storage that doesn't 500 if a file is missing
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
